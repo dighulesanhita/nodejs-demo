@@ -1,0 +1,56 @@
+Authentication
+
+signup
+1. Email and password
+2. Username and password
+3. Email - random password
+4. Email - will collect details and password later
+5. social media signups
+
+
+login
+1. email and password
+2. username and password
+3. social media logins
+
+
+to login
+1. Manage sessions
+2. JWT (JSON Web Tokens)
+
+
+
+
+
+b/e side
+traditional
+1. server will generate session ID also will have certain validity
+2. server will save the session ID -> is a very bad idea | maintenance chaos
+3. server will send the session ID to f/env
+4. verify such session ID is present or not
+
+new convention
+1. Session ID will gen Token
+2. server will send the token to the f/e
+
+f/e
+traditional
+1. session ID will be saved in cookies
+2. send session ID along with request header with all subsequent requests
+3. will validate the TOKEN
+
+new convention
+1. get the token and save (cookies/ local storage/ session storage)
+2. request from f/e should carry the token in request header
+
+
+
+
+
+
+
+
+browser:
+inspect
+storage
+sessionStorage

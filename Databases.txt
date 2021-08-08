@@ -1,0 +1,57 @@
+1. Relational DBMS
+    MySQL, Oracle, MariaDB, PostgreSQL, MS SQL Server
+    Querying Lang: SQL
+
+    * data will be store in cols and rows
+    * prepare JSON
+    * structured data
+    * Schema based
+    * Client tool:
+2. noSQL Databases
+    MongoDB
+    Querying lang: JavaScript
+
+    * data will be store as Object/ JSON
+    * returns JSON
+    * unstructured data
+    * Client tool: default shell client
+    * GUI Client tools: Robo 3T, MongoDB Compass
+    * Programming clients: MongoDB Driver, Mongoose
+
+DB Servers
+    URI/ IP address
+    Port
+    Creds
+
+DB Client
+
+https://jsonplaceholder.typicode.com/
+
+
+MySQL          Vs           MongoDB
+
+table                       Collection
+Row                         Document
+Column                      Field
+Joins                       Embedded documents, linking
+
+
+
+
+# what can you achieve with JavaScript
+
+JavaScript
+Front End(Angular, ReactJS, VueJS), Backend(NodeJS), Desktop Apps(Electron\js), Database (MongoDB), Android and iOS (React Native, Ionic)
+
+Java
+Backend, Desktop Apps, Android Apps
+
+DotNet
+Backend, Desktop Apps, Android and iOS Apps
+
+PHP
+Backend
+
+
+#Read about Async Await
+# create environmentsprocess.env

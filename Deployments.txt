@@ -1,0 +1,7 @@
+Azure
+AWS
+Google cloud
+
+for JS/ express apps - no build process at all
+1. checkin the code
+2. 

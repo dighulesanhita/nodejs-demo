@@ -1,0 +1,159 @@
+C:\Program Files\MongoDB\Server\5.0\bin>mongo
+MongoDB shell version v5.0.2
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("757f4acb-078d-4736-89b3-b0104f091a56") }
+MongoDB server version: 5.0.2
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+We recommend you begin using "mongosh".
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2021-08-07T08:00:38.992+01:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> db
+test
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use usersDB
+switched to db usersDB
+> db
+usersDB
+> db.createCollection("users")
+{ "ok" : 1 }
+> show dbs
+admin    0.000GB
+config   0.000GB
+local    0.000GB
+usersDB  0.000GB
+> db.users.insert({name: 'Sanhita'})
+WriteResult({ "nInserted" : 1 })
+> show collections
+users
+> db.users.insert({age:20})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({skillset: ['NodeJS', 'ng']})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({city: 'London'})
+WriteResult({ "nInserted" : 1 })
+> db.users.insert({city: 'Sydney', address: {street: 'abc street', zip: 321092}})
+WriteResult({ "nInserted" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("610e8da910a0081d8dfe8d5b"), "name" : "Sanhita" }
+{ "_id" : ObjectId("610e8e1a10a0081d8dfe8d5c"), "age" : 20 }
+{ "_id" : ObjectId("610e8e4910a0081d8dfe8d5d"), "skillset" : [ "NodeJS", "ng" ] }
+{ "_id" : ObjectId("610e8e5c10a0081d8dfe8d5e"), "city" : "London" }
+{ "_id" : ObjectId("610e8e8f10a0081d8dfe8d5f"), "city" : "Sydney", "address" : { "street" : "abc street", "zip" : 321092 } }
+> db.users.find({age: 20})
+{ "_id" : ObjectId("610e8e1a10a0081d8dfe8d5c"), "age" : 20 }
+> db.users.findOne({age: 20})
+{ "_id" : ObjectId("610e8e1a10a0081d8dfe8d5c"), "age" : 20 }
+> db.user.find({city: 'London'})
+> db.users.find({city: 'London'})
+{ "_id" : ObjectId("610e8e5c10a0081d8dfe8d5e"), "city" : "London" }
+> db.users.update({age: 20}, {$set: {name: 'John', age: 30}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("610e8da910a0081d8dfe8d5b"), "name" : "Sanhita" }
+{ "_id" : ObjectId("610e8e1a10a0081d8dfe8d5c"), "age" : 30, "name" : "John" }
+{ "_id" : ObjectId("610e8e4910a0081d8dfe8d5d"), "skillset" : [ "NodeJS", "ng" ] }
+{ "_id" : ObjectId("610e8e5c10a0081d8dfe8d5e"), "city" : "London" }
+{ "_id" : ObjectId("610e8e8f10a0081d8dfe8d5f"), "city" : "Sydney", "address" : { "street" : "abc street", "zip" : 321092 } }
+> db.users.updateOne({name: 'Sanhita'}, {$set: {name: 'Sanhita', age: '20'}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.users.updateMany
+// study about this on google
+>
+> db.users.find()
+{ "_id" : ObjectId("610e8da910a0081d8dfe8d5b"), "name" : "Sanhita", "age" : "20" }
+{ "_id" : ObjectId("610e8e1a10a0081d8dfe8d5c"), "age" : 30, "name" : "John" }
+{ "_id" : ObjectId("610e8e4910a0081d8dfe8d5d"), "skillset" : [ "NodeJS", "ng" ] }
+{ "_id" : ObjectId("610e8e5c10a0081d8dfe8d5e"), "city" : "London" }
+{ "_id" : ObjectId("610e8e8f10a0081d8dfe8d5f"), "city" : "Sydney", "address" : { "street" : "abc street", "zip" : 321092 } }
+> db.users.remove({"city" : "London"})
+WriteResult({ "nRemoved" : 1 })
+> db.users.find()
+{ "_id" : ObjectId("610e8da910a0081d8dfe8d5b"), "name" : "Sanhita", "age" : "20" }
+{ "_id" : ObjectId("610e8e1a10a0081d8dfe8d5c"), "age" : 30, "name" : "John" }
+{ "_id" : ObjectId("610e8e4910a0081d8dfe8d5d"), "skillset" : [ "NodeJS", "ng" ] }
+{ "_id" : ObjectId("610e8e8f10a0081d8dfe8d5f"), "city" : "Sydney", "address" : { "street" : "abc street", "zip" : 321092 } }
+>db.users.deleteOne(---)
+>db.users.deleteMany(---)
+
+---------------------------------
+
+
+Microsoft Windows [Version 10.0.19042.1110]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Projects>cd express-rest-api-v2
+
+C:\Projects\express-rest-api-v2>code .
+
+C:\Projects\express-rest-api-v2>npm i mongoose-auto-increment
+npm WARN mongoose-auto-increment@5.0.1 requires a peer of mongoose@^4.1.12 but none is installed. You must install peer dependencies yourself.
+
++ mongoose-auto-increment@5.0.1
+added 2 packages from 7 contributors and audited 156 packages in 1.21s
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 2 vulnerabilities (1 low, 1 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+C:\Projects\express-rest-api-v2>npm i passport
+npm WARN mongoose-auto-increment@5.0.1 requires a peer of mongoose@^4.1.12 but none is installed. You must install peer dependencies yourself.
+
++ passport@0.4.1
+added 3 packages from 2 contributors and audited 159 packages in 1.147s
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 2 vulnerabilities (1 low, 1 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+C:\Projects\express-rest-api-v2>npm install passport-local
+npm WARN mongoose-auto-increment@5.0.1 requires a peer of mongoose@^4.1.12 but none is installed. You must install peer dependencies yourself.
+
++ passport-local@1.0.0
+added 1 package from 1 contributor and audited 160 packages in 1.061s
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 2 vulnerabilities (1 low, 1 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+C:\Projects\express-rest-api-v2>npm install jsonwebtoken
+npm WARN mongoose-auto-increment@5.0.1 requires a peer of mongoose@^4.1.12 but none is installed. You must install peer dependencies yourself.
+
++ jsonwebtoken@8.5.1
+added 14 packages from 9 contributors and audited 174 packages in 1.516s
+
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 2 vulnerabilities (1 low, 1 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+C:\Projects\express-rest-api-v2>
+

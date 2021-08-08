@@ -1,0 +1,643 @@
+Github Repo Link: 
+https://github.com/arunprabu/nodejs-course-july2021
+
+
+NodeJS Quick Intro :
+https://github.com/arunprabu/Node-js/blob/master/NodeJS.pdf
+
+
+NodeJS
+-====
+TypeScript
+---
+  TS = JS + Datatyping 
+
+  Compiled to JS languages 
+
+  Primitive Datatypes 
+  ----
+    string, number, boolean, undefined, null, Symbol(ES2015), BigInt(ES2017)
+  
+  ---
+  1. Loosely-typed Language 
+
+      JS Syntax 
+      ====
+      var x = 10;
+      x = true; // valid 
+      x = 'Arun'; // valid 
+      x = [];
+      x = {};
+      x = function(){
+
+      }
+
+  2. Strictly-typed Language 
+      Java Syntax=
+      ====
+      String myName = "Arun";
+      myName = "John"; //valid 
+      myName = true; //error 
+
+
+TS Syntax 
+====
+  var y: number = 20;
+  y = true;  // error 
+
+  var myName: string = "Arun";
+  var isLoggedIn: boolean = false;
+  var n: null = null;
+  var u: undefined; 
+
+  var myArr1: Array<string> = ["red", "green"];
+  var myArr2: string[] = ["red", "green"];
+
+  var anything: any = "Arun";
+  anything = true; // valid 
+
+  =====
+
+  1. Implicit Datatyping 
+      var y = 20;
+      y = true; // error 
+  2. Explicit Datatyping 
+      var y: number = 20;
+      y = true;  // error 
+
+
+=====
+
+
+
+const menu = `<ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+</ul>
+`
+
+function getHomePage(){
+  return `
+  <html>
+    <head>
+      <title>SSR App Demo</title>
+    </head>
+    <body>
+      ${menu}
+
+      <div>
+        <h1 style="color: blue;">Welcome to my Home Page</h1>
+      </div>
+    </body>
+  </html>
+  `
+}
+
+
+=======
+
+11-http.js
+===
+// Server Side Rendering App
+const http = require('http');
+
+const menu = `<ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/contact">Contact</a></li>
+</ul>
+`
+
+function getHomePage(){
+  return `
+  <html>
+    <head>
+      <title>SSR App Demo</title>
+    </head>
+    <body>
+      ${menu}
+
+      <div>
+        <h1 style="color: blue;">Welcome to my Home Page</h1>
+      </div>
+    </body>
+  </html>
+  `
+}
+
+function getAboutPage(){
+  return `
+  <html>
+    <head>
+      <title>SSR App Demo</title>
+    </head>
+    <body>
+      ${menu}
+      <div>
+        <h1>Welcome to my About Page</h1>
+      </div>
+    </body>
+  </html>
+  `
+}
+
+function getContactPage(){
+  return `
+  <html>
+    <head>
+      <title>SSR App Demo</title>
+    </head>
+    <body>
+      ${menu}
+      <div>
+        <h1>Welcome to my Contact Page</h1>
+      </div>
+    </body>
+  </html>
+  `
+}
+
+function get404Page(){
+  return `
+  <html>
+    <head>
+      <title>SSR App Demo</title>
+    </head>
+    <body>
+      <div>
+        <h1>404 - Page not found</h1>
+      </div>
+    </body>
+  </html>
+  `
+}
+
+
+http.createServer( (req, res)=> {
+
+  res.writeHead(200, {"Content-Type": "text/html"});
+  // handling multiple urls
+  switch(req.url){
+    case '/':
+      // sending HTML Response
+      res.write(getHomePage());
+      break;
+
+    case '/about':
+      // sending HTML Response
+      res.write(getAboutPage());
+      break;
+    
+    case '/contact':
+      // sending HTML Response
+      res.write(getContactPage());
+      break;
+
+    default: 
+      res.writeHead(404, {"Content-Type": "text/html"});
+      res.write(get404Page());
+  }
+  res.end();
+}).listen( 3000, ()=> {
+  console.log('Server is up on http://localhost:3000');
+})
+
+
+
+======
+
+
+Webapps
+----
+  1. Server Side Rendering Apps 
+      1 Server 
+        Front end (HTML, CSS, JS) + Back End + DB Queries 
+
+      Resp: 
+        HTML, CSS, JS, Data
+
+      Disadv 
+      ----
+        Pages will refresh 
+        Consume more bandwidth 
+        Slower webapps 
+        Bad UX 
+
+
+  2. Client Side Rendering Apps + REST API 
+        2 Servers 
+          1 Front End Server (Front End App / Single Page Apps - SPA)
+            Port: 4200
+            (Codebase: HTML, CSS, JS)
+            Resp: HTML, CSS, JS, (Wait for the data)
+
+            Frameworks/Libraries:
+              Angular 
+              React JS (Library)
+              VueJS 
+
+          1 Back End Server (REST API )
+            Port: 8080
+            (Codebase: Backend + DB Queries )
+            Resp: JSON 
+
+            Tools/Frameworks:
+              NodeJS 
+              ExpressJS Framework 
+
+          
+=========
+
+
+  Dependency Management
+---- 
+  1. Project Dependencies 
+      For the func of the app. 
+      Will be part of the deployable codebase
+
+      Examples: 
+        dropzone, jquery, express 
+
+      Commands 
+      ----
+        npm install express 
+        npm i express 
+        npm i express --save 
+        npm i express 
+
+        npm update express --save 
+        npm uninstall express --save
+
+
+  2. Development Dependencies
+      For the development workflow 
+
+      Examples: 
+        typescript 
+
+      Commands
+      ---
+        npm install typescript --save-dev 
+        npm i typescript --save-dev 
+        npm install typescript -D 
+        npm i typescript -D 
+
+        npm update typescript --D 
+        npm uninstall typescript --D 
+
+===========
+
+
+
+Database
+----
+  1. Relational DBMS 
+      MySQL, Oracle, MariaDB, PostgreSQL, MS SQL Server 
+      Querying Lang: SQL 
+
+      * data will be stored in cols and rows 
+      * prepare JSON 
+      * structured data 
+      * Schema-Based 
+
+
+  2. NoSQL Databases 
+      MongoDB 
+      Querying Lang: JavaScript  
+
+      * data will be stored as Object / JSON
+      * returns JSON 
+      * unstructured data 
+      * Schemaless 
+
+      * Client Tools
+        * Default shell client 
+        * GUI Client tools (Robo3T, MongoDB Compass )
+        * Programming Clients (MongoDB Driver, Mongoose Driver )
+        
+
+
+
+
+DB Server 
+----
+  URL/IP Address 
+  Port
+  Creds 
+
+DB Client 
+----
+  * Default Client (shell clients)
+  * Third party client tools 
+
+
+MongoDB
+====
+
+// Start the MongoDB Server 
+C:/Program Files/MongoDB/Server/4.4/bin> mongod 
+
+
+.....
+.....
+....
+
+// Launching MongoDB Shell Client 
+C:/Program Files/MongoDB/Server/4.4/bin> mongo 
+> 
+
+
+
+TODO: Learn about process.env 
+
+
+======
+
+
+mongo.js 
+===
+var process = require("process");
+var mongoose = require("mongoose");
+var mongoConfig = require("../config/mongoConfig.json");
+
+var dbURI = mongoConfig.url;
+//var dbOptions = mongoConfig.options;
+
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+// When successfully connected
+mongoose.connection.on('connected', function () {  
+  console.log('Mongoose default connection open to ' + dbURI);
+}); 
+
+// If the connection throws an error
+mongoose.connection.on('error',function (err) {  
+  console.log('Mongoose default connection error: ' + err);
+}); 
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {  
+  console.log('Mongoose default connection disconnected'); 
+});
+
+// If the Node process ends, close the Mongoose connection 
+process.on('SIGINT', function() {  
+  mongoose.connection.close(function () { 
+    console.log('Mongoose default connection disconnected through app termination'); 
+    process.exit(0); 
+  }); 
+}); 
+
+module.exports = mongoose;
+
+
+
+
+=======
+
+models/user.js
+===
+const mongoose = require('./mongo'); // importing the connection configuration
+
+const Schema = mongoose.Schema;
+
+// name of the Collection is users
+const User = new Schema({
+  userId: Number,
+  name: String,
+  email: String,
+  phone: String,
+  status: String,
+  createdBy: String,
+  createdOn: { type: Date, default: Date.now },
+  updatedBy: String,
+  updatedOn: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model('User', User);
+
+====
+config/mongoConfig.json
+===
+{
+  "url": "mongodb://localhost/usersDB",
+  "options": {}
+}
+
+
+====
+
+
+====
+mongo.js
+====
+var process = require("process");
+var mongoose = require("mongoose");
+const autoIncrement = require('mongoose-auto-increment');
+var mongoConfig = require("../config/mongoConfig.json");
+
+var dbURI = mongoConfig.url;
+//var dbOptions = mongoConfig.options;
+
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+// When successfully connected
+mongoose.connection.on('connected', function () {  
+  console.log('Mongoose default connection open to ' + dbURI);
+}); 
+
+// If the connection throws an error
+mongoose.connection.on('error',function (err) {  
+  console.log('Mongoose default connection error: ' + err);
+}); 
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {  
+  console.log('Mongoose default connection disconnected'); 
+});
+
+// If the Node process ends, close the Mongoose connection 
+process.on('SIGINT', function() {  
+  mongoose.connection.close(function () { 
+    console.log('Mongoose default connection disconnected through app termination'); 
+    process.exit(0); 
+  }); 
+}); 
+
+autoIncrement.initialize(mongoose.connection);
+module.exports = mongoose;
+
+
+======
+
+
+
+//models/user.js
+====
+const autoIncrement = require('mongoose-auto-increment');
+const mongoose = require('./mongo'); // importing the connection configuration
+
+const Schema = mongoose.Schema;
+
+// name of the Collection is users
+const User = new Schema({
+  userId: {
+    type: Number,
+    unique : true,  
+    required : true 
+  },
+  name: String,
+  email: String,
+  phone: String,
+  status: String,
+  createdBy: String,
+  createdOn: { type: Date, default: Date.now },
+  updatedBy: String,
+  updatedOn: { type: Date, default: Date.now }
+});
+
+User.plugin(autoIncrement.plugin, { model: 'User', field: 'userId', startAt: 1 });
+module.exports = mongoose.model('User', User);
+
+
+
+====
+
+
+config/passportConfig.js
+===
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+var Account = mongoose.model('Account');
+
+// basic config for login using passport local 
+passport.use(new LocalStrategy({
+    usernameField: 'email'
+  },
+  function(email, password, done) {
+    Account.findOne({ email: email }, function (err, account) {
+      if (err) { return done(err); }
+      // Return if account not found in database
+      if (!account) {
+        return done(null, false, {
+          message: 'Account not found'
+        });
+      }
+      // Return if password is wrong
+      if (!account.validatePassword(password)) {
+        return done(null, false, {
+          message: 'Password is wrong'
+        });
+      }
+      // If credentials are correct, return the account object
+      return done(null, account);
+    });
+  }
+));
+
+
+=====
+
+
+
+
+models/account.js
+===
+const autoIncrement = require('mongoose-auto-increment');
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const mongoose = require('./mongo'); // importing the connection configuration
+
+const Schema = mongoose.Schema;
+
+// name of the Collection is accounts
+const Account = new Schema({
+  accountId: {
+    type: Number,
+    unique: true,
+    required: true
+  },
+  name: String,
+  email: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  salt: String,
+  hash: String,
+  status: String,
+  isEmailVerified: Boolean,
+  createdBy: String,
+  createdOn: { type: Date, default: Date.now },
+  updatedBy: String,
+  updatedOn: { type: Date, default: Date.now }
+}, { strict: true }); // learn about true and false
+
+// util method -- to encrypt p/w using salt 
+// then, you will get the relevant hash for the p/w 
+Account.methods.setPassword = function(password) { // original password
+  console.log(password);
+  // create salt to be applied on the p/w -- to get the hash
+  this.salt = crypto.randomBytes(16).toString('hex');
+  console.log(this.salt);
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512' ).toString('hex');
+  console.log(this.hash);
+}
+
+// have validatePassword methd -- take in original p/w as input
+Account.methods.validatePassword = function(password){
+  console.log(this.salt);
+  // validate the p/w and return true or false
+  const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512' ).toString('hex');
+  return this.hash === hash;
+}
+
+// Gen JWT 
+// only if successfully authenticated
+Account.methods.generateJWT = function(){
+  const today = new Date();
+  const expirationDate = new Date(today);
+  expirationDate.setDate(today.getDate() + 60);
+
+  return jwt.sign({
+    email: this.email,
+    accountId: this.accountId,
+    exp: parseInt(expirationDate.getTime() / 1000, 10)
+  }, 'secret');
+
+}
+
+
+Account.plugin(autoIncrement.plugin, { model: 'Account', field: 'accountId', startAt: 1 });
+module.exports = mongoose.model('Account', Account);
+
+
+
+=====
+
+npm install pm2 -g
+
+To manage express-generator based project in pm2
+pm2 start bin/www — to restart the process for the app
+pm2 list or pm2 ls — to see list of pm2 processes
+pm2 stop bin/www — to stop pm2 process
+pm2 delete bin/www — to kill the stopped process
+pm2 monit — to Monit all processes launched
+pm2 restart bin/www — to restart the process for the app
+
+pm2 monitor — To look at all the pm2 related things in web dashboard
+Please follow the popup or go to this kind of URL
+https://id.keymetrics.io/api/oauth/authorize?client_id=138558311&response_mode=query&response_type=token&scope=all
+
+After that login to pm2 website using github and look at the dashboard for the app.
+
+=======
+
+
+
+
+
+
+
